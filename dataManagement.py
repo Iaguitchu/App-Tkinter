@@ -2,12 +2,17 @@
 class Product:
 
     def __init__(self,
-        id= None, imgPath= '', name= '', description= '', stockQuantity= 0,):
-        self.id = id
-        self.imgPath = imgPath
-        self.name = name
-        self.description = description
-        self.stockQuantity = stockQuantity
+        id= None,
+        imgPath= '',
+        name= '',
+        description= '',
+        stockQuantity= 0,
+    ):
+        self.id             = id
+        self.imgPath        = imgPath
+        self.name           = name
+        self.description    = description
+        self.stockQuantity  = stockQuantity
         ...
     # END def __init__
     ...

@@ -2,7 +2,7 @@ from tkinter import *
 from tkinter.font import Font
 from dataManagement import *
 
-class MysotckManager:
+class MyStockManager:
     def __init__(self):
 
         #CONFIGURAÇÕES
@@ -93,47 +93,56 @@ class MysotckManager:
             ...
 
     def _BuildFrameProductsContent(self, parent: Frame):
-        
-        parentsWidth = parent.winfo_reqwidth() #largura requerida
-        parentHeight = parent.winfo_reqheight() #altura requerida
 
-        frameProdsListWidth = parentsWidth
-        frameProdsNavWidth = parentsWidth
+        parentWidth     = parent.winfo_reqwidth()
+        parentHeight    = parent.winfo_reqheight()
 
-        frameProdsLisHeigth = int(parentHeight * 95 /100)
-        frameProdsNavHeigth = int(parentHeight * 5 / 100)
+        frameProdsListWidth = parentWidth
+        framePagesNavWidth  = parentWidth
 
-        frameProdsList = Frame(master= parent, width= frameProdsListWidth, height= frameProdsLisHeigth,) #bg= 'red')
+        frameProdsListHeight    = int(parentHeight * 95 / 100)
+        framePagesNavHeight     = int(parentHeight *  5 / 100)
+
+        frameProdsList = Frame(master= parent,
+            width= frameProdsListWidth, height= frameProdsListHeight,
+            # bg= 'red'
+        )
+        framePagesNav = Frame(master= parent,
+            width= framePagesNavWidth, height= framePagesNavHeight,
+            # bg= 'purple'
+        )
+
         frameProdsList.pack()
-
-        framePagesNav = Frame(master = parent, width= frameProdsNavWidth, height= frameProdsNavHeigth,) #bg = "purple")
         framePagesNav.pack()
 
         self._BuildFrameProdsListContent(frameProdsList)
         self._BuildFramePagesNavContent(framePagesNav)
 
+
         self._load_productsList()
-        self._load_pagesNav()
+        self._load_pagesNav()   
     
     def _BuildFrameProdsListContent(self, parent: Frame):
-        parentsWidth = parent.winfo_reqwidth() #largura requerida
-        parentHeight = parent.winfo_reqheight() #altura requerida
+
+        parentWidth = parent.winfo_reqwidth()
+        parentHeight= parent.winfo_reqheight()
 
         pHeight = parentHeight - self.g_MAX_ITEMS_PER_PAGE - 1
-        frameProdRowHeight =  int(pHeight / self.g_MAX_ITEMS_PER_PAGE)
+        frameProdRowHeight = int(pHeight / self.g_MAX_ITEMS_PER_PAGE)
 
         def addFrameSeparator():
-            Frame(master= parent, width=parentsWidth, height=1, bg='grey').pack()
+            Frame(master= parent, width=parentWidth, height=1, bg='grey').pack()
             
 
         colors = ['orange','purple','green','red']
         addFrameSeparator()
         for i in range(self.g_MAX_ITEMS_PER_PAGE):
-            frameProdRow = Frame(master=parent, width=parentsWidth, height= frameProdRowHeight, #bg= colors[i]
-                                  highlightbackground='grey', highlightthickness= 1)
+            frameProdRow = Frame(master=parent, width=parentWidth, height= frameProdRowHeight, #bg= colors[i]
+                                  highlightbackground='grey', )
             frameProdRow.pack()
+            addFrameSeparator()
             self._BuildFrameProdsListRowContent(frameProdRow)
-        addFrameSeparator()
+        
 
         
 
@@ -192,8 +201,8 @@ class MysotckManager:
 
             self._load_productRow(rowColsFrames, product)
             
-        print(rowColsFrames)
-
+        #print(rowColsFrames)
+        #print(product)
     def _load_productRow(self, rowColsFrame, product: Product):
          
 
@@ -208,21 +217,25 @@ class MysotckManager:
         ...
 
     def _load_nameDesc(self, parent: Frame, product: Product):
+        
         parentWidth = parent.winfo_reqwidth()
         parentHeight = parent.winfo_reqheight()
 
         frameNameHeight = int(parentHeight * 10/100)
         frameDescHeight = int(parentHeight * 90/100)
 
+        frameName = Frame(master = parent, width= parentWidth, height = frameNameHeight,)
+        frameDesc = Frame(master = parent, width= parentWidth, height=frameDescHeight)
+        frameName.pack()
+        frameDesc.pack()
+        
         lblName = Label(master= frameName, text= product.name, font= self.f_TimesBold)
         lblDesc = Label(master= frameDesc, text= product.description, font= self.f_BookAntiq)
 
+        print(product.name)
 
-
-        frameName = Frame(master = parent, width= parentWidth, height = frameNameHeight, bg= 'red').pack()
-
-        frameDesc = Frame(master = parent, width= parentWidth, height=frameDescHeight, bg= 'orange').pack()
-        ...
+        lblName.pack()
+        lblDesc.pack()
 
     def _load_stockQuantity(self, parent:Frame, product: Product):
         ...
@@ -255,5 +268,5 @@ class MysotckManager:
           print('action Delete Products')
 
         
-MysotckManager()
+MyStockManager()
         
