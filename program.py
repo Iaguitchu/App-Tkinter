@@ -238,7 +238,8 @@ class MyStockManager:
         lblDesc.pack()
 
     def _load_stockQuantity(self, parent:Frame, product: Product):
-        ...
+        lblSotck = Label(master= parent, text = product.stockQuantity)
+        lblSotck.pack()
 
     def _load_deleteCheckButton(self, parent:Frame, product: Product):
         ...
@@ -269,4 +270,3 @@ class MyStockManager:
 
         
 MyStockManager()
-        
